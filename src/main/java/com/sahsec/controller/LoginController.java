@@ -14,6 +14,10 @@ import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.json.simple.JSONObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -27,6 +31,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sahsec.entities.Category;
+import com.sahsec.entities.User;
+
 import service.Patch;
 import service.PatchHistory;
  
@@ -34,6 +41,7 @@ import service.PatchHistory;
 public class LoginController {
 	
 	PatchHistory patchHistory;
+	Session dbSession;
  
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
@@ -44,38 +52,17 @@ public class LoginController {
 	
 	@RequestMapping("/")
 	public ModelAndView loginPage() {
-		Connection con = null;
-		String message = "Connection worked";
-		String queryAdd = "INSERT INTO persons (city,address,firstname,lastname) VALUES ('Asperg','Straﬂe','Herbert','Neumann')";
-		String queryRead = "SELECT * FROM persons";
-		try {
-			con = getRemoteConnection();
-		} catch (ClassNotFoundException e) { message = "Class not found " + e.getMessage();}
-	    catch (SQLException e) { message = "SQL Exception " + e.getMessage(); }
 		
-		if(con == null) {
-			message = "connection not available";
-		}else {
-			try {
-				Statement st = con.createStatement();
-				st.executeUpdate(queryAdd);
-				st.close();
-				
-				Statement st2 = con.createStatement();
-				ResultSet rs = st2.executeQuery(queryRead);
-				
-				while(rs.next()) {
-					message += " 1 Person gefunden <br>";
-				}
-				st2.close();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-		}
+		dbSession.beginTransaction();
 		
-		return new ModelAndView("login", "message", message);
+		User user = new User();
+		user.setName("Herbert");
+		
+		dbSession.save(user);
+		dbSession.getTransaction().commit();
+		
+		
+		return new ModelAndView("login", "message", "");
 	}
 	
 	@RequestMapping("/upload")
@@ -127,22 +114,22 @@ public class LoginController {
 	
 	@PostConstruct
 	public void init() {
-	   patchHistory = PatchHistory.getInstance();
+	   //init hibernate and tables
+	   Configuration cfg = new Configuration();
+	   SessionFactory sessionFactory = cfg.configure("hibernate.cfg.xml").buildSessionFactory();
+	   dbSession = sessionFactory.openSession();
 	}
 	
-	private static Connection getRemoteConnection() throws ClassNotFoundException, SQLException {
-	    if (System.getProperty("RDS_HOSTNAME") != null) {
-	      Class.forName("org.postgresql.Driver");
-	      String dbName = System.getProperty("RDS_DB_NAME");
-	      String userName = System.getProperty("RDS_USERNAME");
-	      String password = System.getProperty("RDS_PASSWORD");
-	      String hostname = System.getProperty("RDS_HOSTNAME");
-	      String port = System.getProperty("RDS_PORT");
-	      String jdbcUrl = "jdbc:postgresql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
-	      Connection con = DriverManager.getConnection(jdbcUrl);
-	      return con;
-	  }
-	    return null;
+	private static Connection getRemoteConnection() throws ClassNotFoundException, SQLException { 
+      Class.forName("org.postgresql.Driver");
+      String dbName = "Budgeto";
+      String userName = "postgres";
+      String password = "root";
+      String hostname = "localhost";
+      String port = "5432";
+      String jdbcUrl = "jdbc:postgresql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
+      Connection con = DriverManager.getConnection(jdbcUrl);
+      return con;
 	}
 	
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Test Hexagon</title>
-<link href="../resources/style.css" rel="stylesheet" />
+<link href="<c:url value="/resources/style.css" />" rel="stylesheet" />
 </head>
 <body>
 		<div class="header">

@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Budgeto</title>
-<link href="../resources/style.css" rel="stylesheet" />
+<link href="<c:url value="resources/style.css" />" rel="stylesheet" />
 <body>
 	<div class="content">
 		<div class="uploadForm">
@@ -32,7 +32,7 @@
 		        	</tr>
 		        </c:forEach>
 	        </table>
-		</div>
+		</div> 
 	</div>
 	</body>
 </html> 
