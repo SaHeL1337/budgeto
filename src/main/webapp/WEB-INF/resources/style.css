@@ -1,0 +1,204 @@
+body{
+	background: #141E30;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	
+	font-family: 'Exo', sans-serif;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+
+.grad{
+	position: absolute;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 1;
+	opacity: 0.7;
+}
+
+.header{
+	position: absolute;
+	top: calc(50% - 35px);
+	left: calc(50% - 255px);
+	z-index: 2;
+}
+
+.header div{
+	float: left;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 35px;
+	font-weight: 200;
+}
+
+.header div span{
+	color: #dae9fe !important;
+	font-style: italic;
+}
+
+.login{
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+}
+
+.uploadForm{
+	height: 150px;
+	padding-top: 20px;
+}
+
+.content{
+	margin: auto;
+	width: 530px;
+}
+
+input[type=text]{
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+input[type=password]{
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+input[type=file]{
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.6);
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+input[type=submit]{
+	height: 35px;
+	border: 1px solid #76b852;
+	cursor: pointer;
+	color: #222;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	padding: 6px;
+	margin-top: 10px;
+	background: #76b852;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #8DC26F, #76b852);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #8DC26F, #76b852); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+input[type=submit]:hover{
+	opacity: 0.9;
+}
+
+input[type=submit]:active{
+	opacity: 0.6;
+}
+
+input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.9);
+}
+
+input[type=submit]:focus{
+	outline: none;
+}
+
+.inputSmall{
+	width: 250px;
+}
+
+.inputLong{
+	width: 520px;
+}
+
+.submitSmall{
+	width: 260px;
+}
+
+.submitLong{
+	width: 530px;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(255,255,255,0.6);
+}
+
+#messageContainerError{
+	padding: 25px;
+	background: #b3060b;
+	text-align: center;
+	color: #fff;
+	width: 80%;
+	margin: auto;
+	margin-top: 10px;
+}
+
+#messageContainerSuccess{
+	padding: 25px;
+	text-align: center;
+	color: #222;
+	width: 80%;
+	margin: auto;
+	margin-top: 10px;
+	background: #76b852;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #8DC26F, #76b852);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #8DC26F, #76b852); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#content{
+	padding: 25px;
+	background: #eee;
+	color: #000;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#mapContainer{
+	background: green;
+}
+
+#divToScroll{
+	background: orange;
+	width: 1000px;
+	height: 800px;
+}
+
+.tile{
+	width: 60px;
+	height: 60px; 
+	background: #c5ffb0; 
+}
