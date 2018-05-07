@@ -32,6 +32,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sahsec.entities.Category;
+import com.sahsec.entities.Payment;
+import com.sahsec.entities.Payment.PaymentType;
 import com.sahsec.entities.User;
 
 import service.Patch;
@@ -42,13 +44,6 @@ public class LoginController {
 	
 	PatchHistory patchHistory;
 	Session dbSession;
- 
-	@Bean(name = "multipartResolver")
-	public CommonsMultipartResolver multipartResolver() {
-	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-	    multipartResolver.setMaxUploadSize(100000);
-	    return multipartResolver;
-	}
 	
 	@RequestMapping("/")
 	public ModelAndView loginPage() {
@@ -57,34 +52,46 @@ public class LoginController {
 		
 		User user = new User();
 		user.setName("Herbert");
+		user.setEmail("no@test.real");
+		user.setPassword("password");
 		
-		dbSession.save(user);
+		Category rootCat = new Category();
+		rootCat.setName("root");
+		rootCat.setUser(user);
+		
+		Category secCat = new Category();
+		secCat.setName("secondCategory");
+		secCat.setParent(rootCat);
+		secCat.setUser(user);
+		
+		Payment incPayment = new Payment();
+		incPayment.setCategory(rootCat);
+		incPayment.setName("Gehalt");
+		incPayment.setType(PaymentType.INCOMING);
+		incPayment.setUser(user);
+		
+		Payment outPayment = new Payment();
+		outPayment.setCategory(secCat);
+		outPayment.setName("Schuhe");
+		outPayment.setType(PaymentType.OUTGOING);
+		outPayment.setUser(user);
+		
+		dbSession.saveOrUpdate(user);
+		dbSession.saveOrUpdate(rootCat);
+		dbSession.saveOrUpdate(secCat);
+		dbSession.saveOrUpdate(incPayment);
+		dbSession.saveOrUpdate(outPayment);
 		dbSession.getTransaction().commit();
 		
 		
 		return new ModelAndView("login", "message", "");
 	}
 	
-	@RequestMapping("/upload")
-	public ModelAndView uploadPage() {
-		
-		return new ModelAndView("upload", "patchHistory", patchHistory);
-	}
 	
 	@RequestMapping("/applyPatch/{id}")
 	public ModelAndView applyPatch(@PathVariable("id") int id) {
 		Patch l_patch = patchHistory.getPatchById(id);
 		if(l_patch.getStatus()==Patch.PatchStatus.READY) {
-			l_patch.applyPatch();
-		}
-		return new ModelAndView("redirect:/upload", "patchHistory", patchHistory);
-	}
-	
-	@RequestMapping("/rollbackPatch/{id}")
-	public ModelAndView rollbackPatch(@PathVariable("id") int id) {
-		Patch l_patch = patchHistory.getPatchById(id);
-		if(l_patch.getStatus()==Patch.PatchStatus.PATCHED) {
-			l_patch.rollback();
 		}
 		return new ModelAndView("redirect:/upload", "patchHistory", patchHistory);
 	}

@@ -29,46 +29,57 @@ public class User {
 	@Column(name = "email")
 	private String m_email;
 	
-	@OneToMany(mappedBy="user")
-	private Set<Payment> payments;
+	@OneToMany(mappedBy="m_user")
+	private Set<Payment> m_payments;
+	
+	@OneToMany(mappedBy="m_user")
+	private Set<Category> m_categories;
 
 	public int getId() {
 		return m_id;
 	}
 
-	public void setId(int m_id) {
-		this.m_id = m_id;
+	public void setId(int p_id) {
+		this.m_id = p_id;
 	}
 
 	public String getName() {
 		return m_name;
 	}
 
-	public void setName(String m_name) {
-		this.m_name = m_name;
+	public void setName(String p_name) {
+		this.m_name = p_name;
 	}
 
 	public String getPassword() {
 		return m_password;
 	}
 
-	public void setPassword(String m_password) {
-		this.m_password = m_password;
+	public void setPassword(String p_password) {
+		this.m_password = p_password;
 	}
 
 	public String getEmail() {
 		return m_email;
 	}
 
-	public void setEmail(String m_email) {
-		this.m_email = m_email;
+	public void setEmail(String p_email) {
+		this.m_email = p_email;
 	}
 
 	public Set<Payment> getPayments() {
-		return payments;
+		return m_payments;
 	}
 
-	public void setPayments(Set<Payment> payments) {
-		this.payments = payments;
+	public void setPayments(Set<Payment> p_payments) {
+		this.m_payments = p_payments;
+	}
+	
+	public Set<Category> getCategories() {
+		return m_categories;
+	}
+
+	public void setCategories(Set<Category> p_categories) {
+		this.m_categories = p_categories;
 	}
 }
