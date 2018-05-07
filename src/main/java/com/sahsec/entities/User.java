@@ -2,6 +2,7 @@ package com.sahsec.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,10 +30,10 @@ public class User {
 	@Column(name = "email")
 	private String m_email;
 	
-	@OneToMany(mappedBy="m_user")
+	@OneToMany(mappedBy="m_user", cascade = CascadeType.ALL)
 	private Set<Payment> m_payments;
 	
-	@OneToMany(mappedBy="m_user")
+	@OneToMany(mappedBy="m_user", cascade = CascadeType.ALL)
 	private Set<Category> m_categories;
 
 	public int getId() {
