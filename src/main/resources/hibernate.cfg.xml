@@ -17,6 +17,8 @@
 		<mapping class="com.sahsec.entities.Category"/>
 		<mapping class="com.sahsec.entities.User"/>
 		<mapping class="com.sahsec.entities.Payment"/>
+		<mapping class="com.sahsec.entities.Privilege"/>
+		<mapping class="com.sahsec.entities.Role"/>
 		
     </session-factory>
 </hibernate-configuration>

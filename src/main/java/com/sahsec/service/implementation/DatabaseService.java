@@ -1,4 +1,4 @@
-package com.sahsec.service;
+package com.sahsec.service.implementation;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

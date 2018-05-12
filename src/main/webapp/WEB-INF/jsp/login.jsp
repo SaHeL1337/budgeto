@@ -19,14 +19,12 @@
 				</div> 
 			</c:if> 
 		<div class="login">
-			
 			<form action="login" method="POST">
 				<input class="inputSmall" type="text" placeholder="username" name="username"><br>
 				<input class="inputSmall" type="password" placeholder="password" name="password"><br>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<input class="submitSmall" type="submit" value="Login">
 			</form>
-			
 		</div>
 </body>
 </html>

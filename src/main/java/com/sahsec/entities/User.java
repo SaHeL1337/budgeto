@@ -1,14 +1,20 @@
 package com.sahsec.entities;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +42,10 @@ public class User {
 	@OneToMany(mappedBy="m_user", cascade = CascadeType.ALL)
 	private Set<Category> m_categories;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+	
 	public int getId() {
 		return m_id;
 	}
@@ -83,4 +93,12 @@ public class User {
 	public void setCategories(Set<Category> p_categories) {
 		this.m_categories = p_categories;
 	}
+
+	public Collection<Role> getRoles() {
+	    return roles;
+    }
+
+    public void setRoles(final Collection<Role> roles) {
+        this.roles = roles;
+    }
 }

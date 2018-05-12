@@ -12,9 +12,15 @@
 	</http>
   
     <authentication-manager>
-	    <authentication-provider user-service-ref="customUserDetailService" />
+	    <authentication-provider user-service-ref="customUserDetailService">
+	    	<password-encoder ref="passwordEncoder"/>
+	    </authentication-provider>
 	</authentication-manager>
  
- 	<beans:bean id="customUserDetailService" class="com.sahsec.service.CustomUserDetailService" />
+ 	<beans:bean id="customUserDetailService" class="com.sahsec.service.implementation.CustomUserDetailService" />
+     
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg value="11"/>
+    </beans:bean>
  
 </beans:beans>

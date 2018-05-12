@@ -34,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sahsec.entities.Category;
 import com.sahsec.entities.Payment;
 import com.sahsec.entities.Payment.PaymentType;
-import com.sahsec.service.DatabaseService;
+import com.sahsec.service.implementation.DatabaseService;
 import com.sahsec.entities.User;
  
 @Controller
@@ -92,7 +92,6 @@ public class LoginController {
 	
 	@PostConstruct
 	public void init() {
-	   //init hibernate and tables
 	   dbSession = DatabaseService.getSession();
 	}
 	
